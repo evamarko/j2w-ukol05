@@ -29,15 +29,20 @@ public class RegistraceController {
   public Object form(@Valid @ModelAttribute("form") RegistraceForm form, BindingResult bindingResult) {
     Period period = form.getDatumNarozeni().until(LocalDate.now());
     int vek = period.getYears();
+    String datumNarozeni = form.getDatumNarozeni().getDayOfMonth() + ". " + form.getDatumNarozeni().getMonthValue() + ". " + form.getDatumNarozeni().getYear();
 
-    if (bindingResult.hasErrors() || vek < 9 || vek > 14) {
-      return "/formular";
+    if (vek < 9 || vek > 14) {
+      return new ModelAndView("/formular").addObject("error", "Věk dítětě musí být mezi 9 a 14 roky (včetně).");
+    }
+
+    if (bindingResult.hasErrors()) {
+      return new ModelAndView("/formular");
     }
 
     ModelAndView modelAndView = new ModelAndView("/shrnuti");
     modelAndView.addObject("jmeno", form.getJmeno()).
             addObject("prijmeni", form.getPrijmeni()).
-            addObject("datumNarozeni", form.getDatumNarozeni()).
+            addObject("datumNarozeni", datumNarozeni).
             addObject("pohlavi", form.getPohlavi()).
             addObject("turnus", form.getTurnus()).
             addObject("email", form.getEmail()).

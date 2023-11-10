@@ -4,15 +4,15 @@ import jakarta.validation.constraints.*;
 import java.time.LocalDate;
 
 public class RegistraceForm {
-    @NotBlank
+    @NotBlank (message = "Prosím vyplňte jméno.")
     private String jmeno;
-    @NotBlank
+    @NotBlank (message = "Prosím vyplňte příjmení.")
     private String prijmeni;
-    @NotNull
+    @NotNull (message = "Prosím vyplňte datum narození.")
     private LocalDate datumNarozeni;
-    @NotBlank
+    @NotBlank (message = "Prosím vyberte pohlaví.")
     private String pohlavi;
-    @NotBlank
+    @NotBlank (message = "Prosím vyberte turnus.")
     private String turnus;
     @Email
     private String email;

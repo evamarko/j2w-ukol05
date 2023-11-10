@@ -28,26 +28,32 @@
 
             <div class="form-group">
             <label for="datumNarozeni">Datum narození:</label>
-            [@spring.formInput path="form.datumNarozeni" fieldType="date" /]
+                [@spring.formInput path="form.datumNarozeni" fieldType="date" /]
+                <div class="error">[@spring.showErrors "<br>"/]</div>
+                <div class="error">
+                [#if error??]
+                    ${error}
+                [/#if] </div>
             </div>
+
 
             <div class="form-group">
             <label for="pohlavi">Pohlaví:</label>
             [@spring.formSingleSelect path="form.pohlavi" options={
             "": "",
-            "1": "Chlapec",
-            "2": "Dívka"
+            "Chlapec": "Chlapec",
+            "Dívka": "Dívka"
             } /]
-                <div>[@spring.showErrors "<br>"/]</div>
+                <div class="error">[@spring.showErrors "<br>"/]</div>
             </div>
 
             <div class="form-group">
             <label for="turnus">Turnus:</label>
             [@spring.formSingleSelect path="form.turnus" options={
             "": "",
-            "turnus-1": "5. až 11. července",
-            "turnus-2": "12. až 18. července",
-            "turnus-3": "9. až 25. července"
+            "5. až 11. července": "5. až 11. července",
+            "12. až 18. července": "12. až 18. července",
+            "9. až 25. července": "9. až 25. července"
             } /]
                 <div class="error">[@spring.showErrors "<br>"/]</div>
             </div>
