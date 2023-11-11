@@ -18,36 +18,41 @@ import java.time.Period;
 @Controller
 public class RegistraceController {
 
-  @GetMapping("/")
-  public ModelAndView index() {
-    ModelAndView modelAndView = new ModelAndView("/formular");
-    modelAndView.addObject("form", new RegistraceForm());
-    return modelAndView;
-  }
-
-  @PostMapping("")
-  public Object form(@Valid @ModelAttribute("form") RegistraceForm form, BindingResult bindingResult) {
-    Period period = form.getDatumNarozeni().until(LocalDate.now());
-    int vek = period.getYears();
-    String datumNarozeni = form.getDatumNarozeni().getDayOfMonth() + ". " + form.getDatumNarozeni().getMonthValue() + ". " + form.getDatumNarozeni().getYear();
-
-    if (vek < 9 || vek > 14) {
-      return new ModelAndView("/formular").addObject("error", "Věk dítětě musí být mezi 9 a 14 roky (včetně).");
+    @GetMapping("/")
+    public ModelAndView index() {
+        ModelAndView modelAndView = new ModelAndView("/formular");
+        modelAndView.addObject("form", new RegistraceForm());
+        return modelAndView;
     }
 
-    if (bindingResult.hasErrors()) {
-      return new ModelAndView("/formular");
-    }
+    @PostMapping("")
+    public Object form(@Valid @ModelAttribute("form") RegistraceForm form, BindingResult bindingResult) {
 
-    ModelAndView modelAndView = new ModelAndView("/shrnuti");
-    modelAndView.addObject("jmeno", form.getJmeno()).
-            addObject("prijmeni", form.getPrijmeni()).
-            addObject("datumNarozeni", datumNarozeni).
-            addObject("pohlavi", form.getPohlavi()).
-            addObject("turnus", form.getTurnus()).
-            addObject("email", form.getEmail()).
-            addObject("telefon", form.getTelefon());
-    return modelAndView;
-  }
+        if (form.getDatumNarozeni() == null) {
+            return new ModelAndView("/formular");
+        }
+
+        Period period = form.getDatumNarozeni().until(LocalDate.now());
+        int vek = period.getYears();
+        String datumNarozeni = form.getDatumNarozeni().getDayOfMonth() + ". " + form.getDatumNarozeni().getMonthValue() + ". " + form.getDatumNarozeni().getYear();
+
+        if (vek < 9 || vek > 14) {
+            bindingResult.rejectValue("datumNarozeni", "XXX", "Věk dítětě musí být mezi 9 a 14 roky (včetně).");
+        }
+
+        if (bindingResult.hasErrors()) {
+            return new ModelAndView("/formular");
+        }
+
+        ModelAndView modelAndView = new ModelAndView("/shrnuti");
+        modelAndView.addObject("jmeno", form.getJmeno()).
+                addObject("prijmeni", form.getPrijmeni()).
+                addObject("datumNarozeni", datumNarozeni).
+                addObject("pohlavi", form.getPohlavi()).
+                addObject("turnus", form.getTurnus()).
+                addObject("email", form.getEmail()).
+                addObject("telefon", form.getTelefon());
+        return modelAndView;
+    }
 
 }

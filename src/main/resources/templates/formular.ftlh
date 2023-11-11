@@ -7,47 +7,48 @@
     <title>Registrace na letní dětský tábor</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="image/png" href="/images/favicon.png">
-    <link rel="stylesheet" href="/css/style.css" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/style.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
-    <main>
-        <h1>Registrace na letní dětský tábor</h1>
-        <form action="/" method="post">
-            <div class="form-group mt-5">
+<main>
+    <h1>Registrace na letní dětský tábor</h1>
+    <form action="/" method="post">
+        <div class="form-group mt-5">
             <label for="jmeno">Jméno:</label>
             [@spring.formInput path="form.jmeno" /]
-                <div class="error">[@spring.showErrors "<br>"/]</div>
-            </div>
+            <div class="error">[@spring.showErrors "<br>"/]</div>
+        </div>
 
-            <div class="form-group">
+        <div class="form-group">
             <label for="prijmeni">Příjmení:</label>
             [@spring.formInput path="form.prijmeni" /]
-                <div class="error">[@spring.showErrors "<br>"/]</div>
-            </div>
+            <div class="error">[@spring.showErrors "<br>"/]</div>
+        </div>
 
-            <div class="form-group">
+        <div class="form-group">
             <label for="datumNarozeni">Datum narození:</label>
-                [@spring.formInput path="form.datumNarozeni" fieldType="date" /]
-                <div class="error">[@spring.showErrors "<br>"/]</div>
-                <div class="error">
+            [@spring.formInput path="form.datumNarozeni" fieldType="date" /]
+            <div class="error">[@spring.showErrors "<br>"/]</div>
+            <div class="error">
                 [#if error??]
                     ${error}
                 [/#if] </div>
-            </div>
+        </div>
 
 
-            <div class="form-group">
+        <div class="form-group">
             <label for="pohlavi">Pohlaví:</label>
             [@spring.formSingleSelect path="form.pohlavi" options={
             "": "",
             "Chlapec": "Chlapec",
             "Dívka": "Dívka"
             } /]
-                <div class="error">[@spring.showErrors "<br>"/]</div>
-            </div>
+            <div class="error">[@spring.showErrors "<br>"/]</div>
+        </div>
 
-            <div class="form-group">
+        <div class="form-group">
             <label for="turnus">Turnus:</label>
             [@spring.formSingleSelect path="form.turnus" options={
             "": "",
@@ -55,21 +56,21 @@
             "12. až 18. července": "12. až 18. července",
             "9. až 25. července": "9. až 25. července"
             } /]
-                <div class="error">[@spring.showErrors "<br>"/]</div>
-            </div>
+            <div class="error">[@spring.showErrors "<br>"/]</div>
+        </div>
 
-            <div class="form-group">
+        <div class="form-group">
             <label for="email">E-mail:</label>
             [@spring.formInput path="form.email" fieldType="email" /]
-            </div>
+        </div>
 
-            <div class="form-group">
+        <div class="form-group">
             <label for="telefon">Telefon:</label>
             [@spring.formInput path="form.telefon" /]
-            </div>
+        </div>
 
-            <button type="submit" class="btn btn-primary mt-3">Odeslat</button>
-        </form>
-    </main>
+        <button type="submit" class="btn btn-primary mt-3">Odeslat</button>
+    </form>
+</main>
 </body>
 </html>
